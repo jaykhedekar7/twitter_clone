@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form method="post", action="/">
+    <div class="form-group" >
+        <input type="uname" class="form-control" id="exampleFormControlInput1" name = "username" placeholder="Username" style="margin-bottom: 4px;">
+        
+        <textarea class="form-control" id="exampleFormControlTextarea1" name="content" rows="3"
+            placeholder="Enter discussion here"></textarea>
+            <br>
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">  Post  </button>
+              
+    </div>
+</form>
+
+{% for post in posts %}
+<div style="margin-top: 15px ;">
+    <strong>Posted by: @</strong>{{post.username}} <strong>at </strong> {{post.date}}
+<div class="card">
+    <div class="card-body">
+        {{post.content}}
+    </div>
+    
+</div>
+<button type="button" class="btn btn-success float-right" style="margin-top: 4px;">Like <i class="glyphicon glyphicon-thumbs-up"></i></button>
+<br>
+</div>
+{% endfor %}
+
+{% endblock %}

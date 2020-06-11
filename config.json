@@ -1,0 +1,16 @@
+{
+    "params":
+    {
+        "local_server": "True",
+        "local_uri": "mysql://root:@localhost/mbaforum",
+        "prod_uri": "mysql://root:@localhost/mbaforum",
+        "git_url": "",
+        "twit_url": "",
+        "blog_name": "Exam Forum",
+        "jumbotron": "Exam forum",
+        "tagline": "Canvas for my mind.",
+        "num_of_pos": 5,
+        "admin_user": "root",
+        "admin_password": "root"
+    }
+}

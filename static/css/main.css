@@ -1,0 +1,15 @@
+.inputtext {
+    background-color: #FFFFEC;
+    border: 1px solid #ECECFF;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: -1px 0 8px -5px #000000;
+    font-size: 14px;
+}
+.inputtext:hover, .inputtext:focus {
+    background-color: #FFFFFF;
+    border: 1px solid #56B4EF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+
+#exampleFormControlInput1{
+    margin-bottom: 2px;
+}
