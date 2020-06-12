@@ -4,6 +4,7 @@ from sqlalchemy import desc
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 from datetime import datetime
+import MySQLdb
 import random
 import os
 import math
@@ -70,20 +71,20 @@ def registration():
     return render_template('register.html', params=params)
 
 
-# Probelm with login function. Unable to match form credential with credential in database
 @app.route('/login',methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username_form = request.form.get('username')
-        password = request.form.get('password')
-        pass_db = db.engine.execute("SELECT * FROM registration WHERE password = 'password'")
-        user_db = db.engine.execute("SELECT * FROM registration WHERE username = 'username_form'")
-        check_pass = check_password_hash(pass_db, password)
+        username_log = request.form.get('username')
+        password_log = request.form.get('password')
+        database_query = Registration.query.filter_by(username=username_log).first()
+        password_db = database_query.password
+        username_db = database_query.username
+        check_pass = check_password_hash(password_db, password_log)
 
-        if username_form == user_db & check_pass == True:
-            return redirect('/')
+        if (username_db == username_log and check_pass):
+            return render_template('test.html', check_pass=check_pass, password_db=password_db, database_query=database_query, username_db=username_db,password_log=password_log, params=params)
         else:
-            return redirect('/registration')
+            return redirect('/')
     return render_template('login.html', params=params)
 
 
