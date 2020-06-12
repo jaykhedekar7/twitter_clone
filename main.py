@@ -7,7 +7,7 @@ from datetime import datetime
 import MySQLdb
 import random
 import os
-import math
+
 
 with open('config.json', 'r') as c:
     params = json.load(c)["params"]
