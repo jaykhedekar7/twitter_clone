@@ -44,16 +44,17 @@ class Posts(db.Model):
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     posts = Posts.query.filter_by().order_by(desc(Posts.date))
-    if request.method == 'POST':
-        username = request.form.get('username')
-        content = request.form.get('content')
+    if 'user' in session:
+        if request.method == 'POST':
+            username = request.form.get('username')
+            content = request.form.get('content')
+            entry = Posts(username=username, content=content, date=datetime.now())
+            db.session.add(entry)
+            db.session.commit()
+            return redirect ('/')
+        return render_template('index.html', params=params, posts=posts)
 
-        entry = Posts(username=username, content=content, date=datetime.now())
-        db.session.add(entry)
-        db.session.commit()
-        return redirect ('/')
-
-    return render_template('index.html', params=params, posts=posts)
+    return render_template('logoutindex.html', params=params, posts=posts)
 
 
 @app.route('/registration', methods = ['GET', 'POST'])
@@ -82,10 +83,18 @@ def login():
         check_pass = check_password_hash(password_db, password_log)
 
         if (username_db == username_log and check_pass):
-            return render_template('test.html', check_pass=check_pass, password_db=password_db, database_query=database_query, username_db=username_db,password_log=password_log, params=params)
-        else:
+            session['user'] = username_db
             return redirect('/')
+        else:
+            return redirect('/registration')
     return render_template('login.html', params=params)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user')
+    # return render_template('logoutindex.html', params=params, posts=posts)
+    return redirect('/')
 
 
 if __name__ == '__main__':
