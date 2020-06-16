@@ -93,7 +93,6 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('user')
-    # return render_template('logoutindex.html', params=params, posts=posts)
     return redirect('/')
 
 
