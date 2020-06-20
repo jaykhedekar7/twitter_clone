@@ -46,7 +46,8 @@ def home():
     posts = Posts.query.filter_by().order_by(desc(Posts.date))
     if 'user' in session:
         if request.method == 'POST':
-            username = request.form.get('username')
+            #username = request.form.get('username')
+            username = session.get('user')
             content = request.form.get('content')
             entry = Posts(username=username, content=content, date=datetime.now())
             db.session.add(entry)
