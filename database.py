@@ -1,3 +1,9 @@
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+
+
+app = Flask(__name__)
+db = SQLAlchemy(app)
 
 class Registrations(db.Model):
     sno = db.Column(db.Integer, primary_key = True)
